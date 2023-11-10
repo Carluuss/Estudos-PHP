@@ -6,6 +6,6 @@ if($dia == 'ensolarado'){
 }else if ($dia == 'chuvoso'){
     echo("Juvêncio ira para a casa de sua mãe");
 }else{
-    echo("");
+    echo("Juvêncio vai ficar em casa");
 }
 ?>
