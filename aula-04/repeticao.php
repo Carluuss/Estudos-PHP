@@ -3,7 +3,7 @@
 $n = 0;
 
 while($n <= 10){
-    echo("Número: ". $n);
+    echo("<br>Número: ". $n);
     $n++;
 }
 
