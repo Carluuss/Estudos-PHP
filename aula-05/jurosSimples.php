@@ -1,5 +1,5 @@
 <?php
-$capital = 100;
+$capital = $_POST['capital'];
 $taxa = 0.1;
 $tempo = 1;
 
