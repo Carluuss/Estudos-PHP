@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <main>
+        <section>
+            <h1>Cadastro</h1>
+            <form action="produtos.php" method="post">
+                <div>
+                    <div class="itens">
+                        <label for="produto">Produto:</label>
+                        <input type="text" id="produto" name="produto" required onblur="V_produto(this)">
+                        <div id="alertaProduto">
+                        </div>
+                        
+                    </div>
+                        <div class="itens2">
+                            <label for="valor">Valor:</label>
+                            <input type="text" id="valor" name="valor" required onblur="V_valor(this)">
+                            <div id="alertaValor">
+                            </div>
+                        </div>
+                        <div class="itens3">
+                            <label for="quantidade">Quantidade:</label>
+                            <input type="number" id="quantidade" name="quantidade" required onblur="V_quantidade(this)">
+                            <div id="alertaQuantidade">
+                            </div>
+                        </div>
+                        <div class="itens4">
+                            <label for="validade">Validade:</label>
+                            <input type="date" id="validade" name="validade" required onblur="V_validade(this)">
+                            <div id="alertaValidade">
+                        </div>
+                        </div>
+                        <input type="submit" value="Cadastrar" onclick="V_cadastro(this)">
+                </div>
+
+            </form>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
