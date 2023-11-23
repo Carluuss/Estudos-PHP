@@ -41,10 +41,17 @@
                             <input type="date" id="validade" name="validade" required onblur="V_validade(this)">
                             <div id="alertaValidade">
                         </div>
-                        </div>
+                    </div>
                         <input type="submit" value="Cadastrar" onclick="V_cadastro(this)">
-                </div>
-
+                    </div>
+                    
+            </form>
+            <form action="pesquisa.php" method="post">
+                <h2 style="text-align: center;">Pesquisa de Produtos</h2>
+                <label for="id">Id do produto*</label>
+                <input type="number" min="1" id="id" name="id" required onblur="V_pesquisa(this)">
+                <div id="alertaPesquisa"></div>
+                <input type="submit">
             </form>
         </section>
     </main>
