@@ -24,3 +24,12 @@ function V_idade(campo) {
       document.getElementById("alertaIdade").innerHTML = "";
     }
   }
+
+function V_pesquisa(campo) {
+    if (campo.value.trim() == "") {
+      document.getElementById("alertaPesquisa").innerHTML = "*Campo obrigatorio";
+      document.getElementById("alertaPesquisa").style.color = "red";
+    } else {
+      document.getElementById("alertaPesquisa").innerHTML = "";
+    }
+  }
