@@ -14,7 +14,7 @@ $conn = new MySQli('localhost', 'root', '', 'produtos_full');
 if($conn->connect_error){
     die("Connection falied: ". $conn->connect_error);
 }else{
-    $sql = "INSERT INTO produto (produto, valor, quantidade, validade)
+    $sql = "INSERT INTO produtos (produto, valor, quantidade, validade)
     VALUE ('$produto', '$valor', '$quantidade', '$validade' ";
     mysqli_query($conn, $sql);
 }
