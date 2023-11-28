@@ -1,6 +1,19 @@
 <?php
+/*
+if (isset($_SESSION['result'])){
+if($_SESSION['result'] == '1'){
+    unset($_SESSION['result']);
+    echo '<script>alert("Alteração feita com sucesso")</script>';
+}else if($_SESSION['result'] == '2'){
+    unset($_SESSION['result']);
+    echo '<script>alert("Nenhuma alteração foi realizada")</script>';
+}
+}*/
+
 
 $id = $_POST['id'];
+
+
 include_once('head.php');
 include_once("conexao.php");
 //comando SELECT para retornar todas as colunas
@@ -22,7 +35,7 @@ if($linha){
     <main>
         <section>
             <h1>Pesquisa de Produtos</h1>
-            <form action='' method='post'>
+            <form action='atualizar.php' method='post'>
                 <div>
                     <div class='itens'>
                         <label for='produto'>Produto:</label>
@@ -49,7 +62,8 @@ if($linha){
                             <div id='alertaValidade'>
                         </div>
                     </div>
-                        <input type='submit' value='Cadastrar' onclick='V_cadastro(this)'>
+                    <input type ='hidden' name='id' value='$linha[id]'>
+                    <input type='submit' value='Atualizar' onclick='V_cadastro(this)'>
                     </div>
                     
             </form>
