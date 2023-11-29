@@ -16,7 +16,7 @@ $linha = mysqli_fetch_array($resultado);
 if($linha){
 
     echo"<body>
-    <form action='matricula.php' method='post'>
+    <form action='atualizar.php' method='post'>
             <h1>Matricula</h1>
             <div class='itens'>
                 <label for='nome'>Nome: </label>
@@ -38,7 +38,21 @@ if($linha){
                 <input type='number' id='idade' name='idade' required onblur='V_idade(this)' value='$linha[idade]'>
                 <div id='alertaIdade'></div>
             </div>
+            <div class='botao'>
+            <input type ='hidden' name='id' value='$linha[id]'>
+            <input type='submit' value='Atualizar' onclick='V_nome(this)'>
             <a href='./matricula.html'><input type='button' value='Voltar'></a>
+            </div>
+        </form>
+
+        <form action='deletar.php' method='post'>
+            <h1>Deletar matricula</h1>
+            <label for='id'>Id do aluno</label>
+            <input type='number' min='1' id='id' name='id' required onblur='V_pesquisa(this)'
+                placeholder='Digite um id de matricula'>
+            <div id='alertaPesquisa'></div>
+            <input type='submit' value='Deletar'>
+
         </form>
 
         <table border=1>
