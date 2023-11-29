@@ -13,8 +13,8 @@
 
     </header>
     <main>
+        <h1>Cadastro</h1>
         <section>
-            <h1>Cadastro</h1>
             <form action="produtos.php" method="post">
                 <div>
                     <div class="itens">
@@ -52,6 +52,14 @@
                 <input type="number" min="1" id="id" name="id" required onblur="V_pesquisa(this)">
                 <div id="alertaPesquisa"></div>
                 <input type="submit" value="Pesquisar">
+            </form>
+
+            <form action="excluir.php" method="post">
+                <h2 style="text-align: center;">Deletar Proudutos</h2>
+                <label for="id">Id do produto*</label>
+                <input type="number" min="1" id="id" name="id" required onblur="V_pesquisa(this)">
+                <div id="alertaPesquisa"></div>
+                <input type="submit" value="Deletar">
             </form>
         </section>
     </main>
