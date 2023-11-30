@@ -16,4 +16,8 @@ if(mysqli_affected_rows($conn)){
   
 }
 
+sleep(5);
+
+header("location: gerenciarProdutos.php");
+
 ?>

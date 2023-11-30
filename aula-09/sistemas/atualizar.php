@@ -12,11 +12,11 @@ mysqli_query($conn, $sql);
 
 if(mysqli_affected_rows($conn)){
     //$_SESSION['result'] = "1";
-    header('Location:./formulario.html');
+    header('Location:./gerenciarProdutos.php');
 }else{
     echo '<script>alert("Nenhuma alteração foi realizada")</script>';
     //$_SESSION['result'] = "2";
-    header('Location:./formulario.html');
+    header('Location:./gerenciarProdutos.php');
 }
 
 
