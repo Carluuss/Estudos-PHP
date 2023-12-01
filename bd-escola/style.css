@@ -19,10 +19,7 @@ section {
   grid-template-columns: auto auto auto;
 }
 
-.botao{
-  display: flex;
-  flex-direction: row;
-}
+
 
 form {
   border: 1px solid white;
@@ -61,3 +58,4 @@ input {
   position: relative;
   right: 7em;
 }
+

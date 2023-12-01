@@ -16,7 +16,18 @@ if($conn->connect_error){
 }else{
     $sql = "INSERT INTO produtos (produto, valor, quantidade, validade)
     VALUE ('$produto', '$valor', '$quantidade', '$validade') ";
-    mysqli_query($conn, $sql);
+    
+
+    if(mysqli_query($conn, $sql)){
+        if(mysqli_affected_rows($conn)){
+            header('Location:./gerenciarProdutos.php');
+        }else{
+            header('Location:./gerenciarProdutos.php');
+        }
+    }else{
+        echo'Falha no comando SQL';
+    }
+
 }
 
 ?>

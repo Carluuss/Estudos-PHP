@@ -19,8 +19,9 @@ if($result){
     <body>
     <div class='container card mt-2'>
     <h2>Lista de produtos</h2>
+    <a href ='formulario.html'class = 'btn btn-primary'>Cadastrar</a>
     <table id='tabelaPrincipal' class='table table-striped table-sm'>
-        
+    
     <tr class='table-light' class='table-sm'>
     <th>ID</th>
     <th>Produto</th>

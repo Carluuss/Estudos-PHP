@@ -41,7 +41,7 @@ if($linha){
             <div class='botao'>
             <input type ='hidden' name='id' value='$linha[id]'>
             <input type='submit' value='Atualizar' onclick='V_nome(this)'>
-            <a href='./matricula.html'><input type='button' value='Voltar'></a>
+            <a href='./crud.php'><input type='button' value='Voltar'></a>
             </div>
         </form>
 
