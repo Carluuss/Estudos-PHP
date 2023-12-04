@@ -1,13 +1,43 @@
 <?php
 
+
+session_start(); //inicia a sessão
+if (isset($_SESSION['atualizar'])) { //existe uma sessão
+    if ($_SESSION['atualizar'] == "1") { //verifica se sessão é igual a 1
+        unset($_SESSION['atualizar']); //excluir sessão
+        echo "<script>alert('Atualização feita com sucesso')</script>";
+    } else if ($_SESSION['atualizar'] == "2") { //verifica se sessão é igual a 2
+        unset($_SESSION['atualizar']); //excluir sessão
+        echo "<script>alert('Erro ao atualizar produto')</script>";
+    }
+} else if (isset($_SESSION['excluir'])) { //existe uma sessão
+    if ($_SESSION['excluir'] == "1") { //verifica se sessão é igual a 1
+        unset($_SESSION['excluir']); //excluir sessão
+        echo "<script>alert('Deletado com sucesso')</script>";
+    } else if ($_SESSION['excluir'] == "2") { //verifica se sessão é igual a 2
+        unset($_SESSION['excluir']); //excluir sessão
+        echo "<script>alert('Erro ao deletar produto')</script>";
+    }
+} else if (isset($_SESSION['cadastrar'])) { //existe uma sessão
+    if ($_SESSION['cadastrar'] == "1") { //verifica se sessão é igual a 1
+        unset($_SESSION['cadastrar']); //excluir sessão
+        echo "<script>alert('Cadastrado com sucesso')</script>";
+    } else if ($_SESSION['cadastrar'] == "2") { //verifica se sessão é igual a 2
+        unset($_SESSION['cadastrar']); //excluir sessão
+        echo "<script>alert('Erro ao cadastrar produto')</script>";
+    }
+}
+session_destroy();
+
+
 include_once("conexao.php");
 
 
 $sql = "SELECT * FROM produtos";
 $result = mysqli_query($conn, $sql);
 
-if($result){
-    echo"<!DOCTYPE html>
+if ($result) {
+    echo "<!DOCTYPE html>
     <html lang='pt'>
     <head>
     <meta charset='UTF-8'>
@@ -32,9 +62,9 @@ if($result){
     <th>Deletar</th>
     </tr>
     ";
-    
-    while($linha = mysqli_fetch_array($result)){
-        echo"
+
+    while ($linha = mysqli_fetch_array($result)) {
+        echo "
         
         
         <tr id='trCadastro' >
@@ -58,12 +88,12 @@ if($result){
         
         ";
     }
-    echo"</table>
+    echo "</table>
     </body>
     </html>
     ";
-}else{
- echo "0 resultado";
+} else {
+    echo "0 resultado";
 }
-    
+
 ?>

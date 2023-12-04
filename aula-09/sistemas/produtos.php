@@ -30,4 +30,13 @@ if($conn->connect_error){
 
 }
 
+session_start();
+if(mysqli_affected_rows($conn)){//iniciar sessão
+    $_SESSION['cadastrar'] = "1";//atribui um valor a sessão
+    header('Location:./gerenciarProdutos.php');
+}else{
+    $_SESSION['cadastrar'] = "2";//atribui um valor a sessão
+    header('Location:./gerenciarProdutos.php');
+}
+
 ?>

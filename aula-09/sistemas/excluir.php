@@ -8,12 +8,13 @@ $id = $_POST['id'];
 $sql = "DELETE FROM produtos  WHERE id = '$id'";
 mysqli_query($conn, $sql);
 
-if(mysqli_affected_rows($conn)){
-    
-    echo '<script>alert("Produto deletado com sucesso")</script>';
+session_start();
+if(mysqli_affected_rows($conn)){//iniciar sessão
+    $_SESSION['excluir'] = "1";//atribui um valor a sessão
+    header('Location:./gerenciarProdutos.php');
 }else{
-    echo '<script>alert("Nenhum produto foi deletado")</script>';
-  
+    $_SESSION['excluir'] = "2";//atribui um valor a sessão
+    header('Location:./gerenciarProdutos.php');
 }
 
 
