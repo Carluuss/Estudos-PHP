@@ -31,25 +31,21 @@ session_destroy();
 
 
 include_once("conexao.php");
+include_once('bootstrap.php');
+
+$sql = "SELECT * FROM produtos ORDER BY produto";
 
 
-$sql = "SELECT * FROM produtos";
 $result = mysqli_query($conn, $sql);
 
 if ($result) {
-    echo "<!DOCTYPE html>
-    <html lang='pt'>
-    <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Document</title>
-    
-    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN' crossorigin='anonymous'>
-    </head>
+    echo "
     <body>
     <div class='container card mt-2'>
     <h2>Lista de produtos</h2>
     <a href ='formulario.html'class = 'btn btn-primary'>Cadastrar</a>
+    <a href ='dashboard.php'class = 'btn btn-success mt-2 mb-2'>Estatísticas</a>
+    
     <table id='tabelaPrincipal' class='table table-striped table-sm'>
     
     <tr class='table-light' class='table-sm'>
