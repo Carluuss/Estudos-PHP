@@ -38,14 +38,14 @@ echo"<body>
 
 <div class='mb-3'>
 <label class='form-label'>CPF*</label>
-<input type='text' class='form-control' id='cpf' name='cpf' onblur='V_cpf(this)' required>
+<input type='text' class='form-control' id='cpf' name='cpf' onblur='V_cpf(this)' oninput='formatCPF(this)' required>
 <div id= 'alertaCPF' class='form-text'></div>
 </div>
 
 <div class='mb-3'>
 <label class='form-label'>Data de Nascimento*</label>
 <input type='date' class='form-control' id='dataNascimento' name='dataNascimento' onblur='V_dataNascimento(this)' required>
-<div id= 'alertaDataNascimento' class='form-text'>
+<div id='alertaDataNascimento' class='form-text'>
 </div>
 </div>
 
@@ -55,6 +55,7 @@ echo"<body>
 </form>
 </div>
 </body>
+<script type='text/javascript' src='santa_casa.js'></script>
 ";
 
 ?>
