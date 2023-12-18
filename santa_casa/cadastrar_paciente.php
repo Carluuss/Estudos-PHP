@@ -11,7 +11,7 @@ if(mysqli_query($conn,$sql)){
     session_start();
     if(mysqli_affected_rows($conn)){
         $_SESSION["cadastrar"] = "1";
-        header('Location:./cadas"trar_paciente.html.php');
+        header('Location:./cadastrar_paciente.html.php');
     }else{
         $_SESSION["cadastrar"] = "2";
         header('Location:./cadastrar_paciente.html.php');
