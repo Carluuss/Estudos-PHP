@@ -35,7 +35,7 @@ echo"<body>
 <div class='mb-3'>
     <label class='form-label'>Tipo de atendimento*</label>
 
-    <select class='form-select' name='triagem' id='triagem'>
+    <select class='form-select' name='triagem' id='tipo'>
     <option value='M' selected> Moderado</option>
     <option value='C'> Critico</option>
     <option value='U'> Urgente</option>
@@ -45,12 +45,12 @@ echo"<body>
 <div class='mb-3'>
     <label class='form-label'>Nome do Paciente*</label>
 
-    <select class='form-select' name='nome' id='nome'>";
+    <select class='form-select' name='id_paciente' id='nome'>";
     if($resultado){
         while($linha = mysqli_fetch_array($resultado)){
 
             echo"
-            <option value='$linha[id]' selected>$linha[nome] </option>";
+            <option value='$linha[id_paciente]'>$linha[nome] </option>";
     }}
     echo"
         </select>
