@@ -4,7 +4,7 @@ $tipo = $_POST['tipo'];
 $id_paciente = $_POST['id_paciente'];
 
 include_once('conexao.php');
-$sql = "INSERT INTO pacientes (`data`, tipo, id_paciente) VALUE ('$data', '$tipo', '$id_paciente')";
+$sql = "INSERT INTO atendimentos (`data`, tipo, id_paciente) VALUE ('$data', '$tipo', '$id_paciente')";
 
 if(mysqli_query($conn,$sql)){
     session_start();

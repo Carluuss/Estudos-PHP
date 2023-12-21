@@ -35,7 +35,7 @@ echo"<body>
 <div class='mb-3'>
     <label class='form-label'>Tipo de atendimento*</label>
 
-    <select class='form-select' name='triagem' id='tipo'>
+    <select class='form-select' name='tipo' id='tipo'>
     <option value='M' selected> Moderado</option>
     <option value='C'> Critico</option>
     <option value='U'> Urgente</option>
