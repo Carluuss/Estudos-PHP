@@ -72,6 +72,9 @@ if ($result) {
         <td data-label='Validade'> $linha[validade]</td>
 
         <input type='hidden' id='produto$linha[id]' value='$linha[produto]'>
+        <input type='hidden' id='valor$linha[id]' value='$linha[valor]'>
+        <input type='hidden' id='quantidade$linha[id]' value='$linha[quantidade]'>
+        <input type='hidden' id='validade$linha[id]' value='$linha[validade]'>
 
         <td><button class='btn btn-warning' onclick='abrirModalEditar($linha[id])'>Editar</button></td>
         
@@ -96,7 +99,8 @@ if ($result) {
 
 ?>
 
-<div class='modal fade' id='modalEditar' tabindex='-1' role='dialog' aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class='modal fade' id='modalEditar' tabindex='-1' role='dialog' aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
     <div class='modal-dialog modal-dialog-centered' role='document'>
         <div class="modal-content">
             <form action="atualizar.php" method="post">
@@ -112,6 +116,18 @@ if ($result) {
                         <input type="text" id="editarProduto" name="produto" class="form-control">
                         <label>Produto</label>
                     </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" id="editarValor" name="valor" class="form-control">
+                        <label>Valor</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" id="editarQuantidade" name="quantidade" class="form-control">
+                        <label>Quantidade</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" id="editarValidade" name="validade" class="form-control">
+                        <label>Validade</label>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class='btn btn-secondary' onclick='fecharModalEditar()'>Fechar</button>
                         <input type="submit" class='btn btn-primary' value="Editar">
@@ -125,18 +141,28 @@ if ($result) {
 </div>
 
 <script>
-    function abrirModalEditar(id){
+    function abrirModalEditar(id) {
         $("#modalEditar").modal("show");
-
-        produto =document.getElementById("produto"+id);
-        editarId =document.getElementById("editarId");
-        editarProduto =document.getElementById("editarProduto");
-
-        editarId.value= id;
+        //onbtem o input hidden produtoid
+        produto = document.getElementById("produto" + id);
+        valor = document.getElementById("valor" + id);
+        quantidade = document.getElementById("quantidade" + id);
+        validade = document.getElementById("validade" + id);
+        //obtem os inputs do modal
+        editarId = document.getElementById("editarId");
+        editarProduto = document.getElementById("editarProduto");
+        editarValor = document.getElementById("editarValor");
+        editarQuantidade = document.getElementById("editarQuantidade");
+        editarValidade = document.getElementById("editarValidade");
+        //preencher modal
+        editarId.value = id;
         editarProduto.value = produto.value;
+        editarValor.value = valor.value;
+        editarQuantidade.value = quantidade.value;
+        editarValidade.value = validade.value;
     }
 
-    function fecharModalEditar(){
+    function fecharModalEditar() {
         $("#modalEditar").modal("hide");
     }
 
