@@ -26,6 +26,14 @@ if (isset($_SESSION['atualizar'])) { //existe uma sessão
         unset($_SESSION['cadastrar']); //excluir sessão
         echo "<script>alert('Erro ao cadastrar produto')</script>";
     }
+}else if (isset($_SESSION['vender'])) { //existe uma sessão
+    if ($_SESSION['vender'] == "1") { //verifica se sessão é igual a 1
+        unset($_SESSION['vender']); //excluir sessão
+        echo "<script>alert('Venda efetuada')</script>";
+    } else if ($_SESSION['vender'] == "2") { //verifica se sessão é igual a 2
+        unset($_SESSION['vender']); //excluir sessão
+        echo "<script>alert('Erro ao vender produto')</script>";
+    }
 }
 session_destroy();
 
@@ -148,29 +156,35 @@ if ($result) {
     aria-hidden="true">
     <div class='modal-dialog modal-dialog-centered' role='document'>
         <div class="modal-content">
-            <form action="update.php" method="post">
+            <form action="vendas.php" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Vender Produtos</h5>
                 </div>
                 <div class="modal-body">
-                    <div class="form-floating mb-3">
-                        <select class=" form-select" name="nome_fantasia">
-                            <option></option>
-                            <?php
+                <?php
 
-                            $result = "SELECT id, produto FROM produtos";
-                            $resultado = mysqli_query($conn, $result);
-
-                            while ($row = mysqli_fetch_assoc($resultado)) {
-                                echo '<option value="' . $row['nome_fantasia'] . '"> ' . $row['nome_fantasia'] . ' </option>';
-                            }
-                            ?>
-                        </select>
-                        <label>Produto</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" id="editarQuantidade" name="quantidade" class="form-control">
-                        <label>Quantidade</label>
+                $sql = "SELECT * FROM produtos WHERE 1";
+                $result = mysqli_query($conn, $sql);
+                $linha = mysqli_fetch_array($result);
+                
+                echo("
+                    <div class='form-floating mb-3'>
+                        <select class='form-select' name='produto' aria-label='Default select example'>
+                            <option selected>Selecione o produto</option>
+                ");
+                        while($linha = mysqli_fetch_array($result)) {
+                            echo("<option value= ". $linha['id']. "> ".$linha["produto"]."</option>");
+                        }
+                echo("</select>
+                <label>Produto</label>
+                </select>
+            </div>");
+                
+                
+                ?>
+                <div class="form-floating mb-3">
+                    <input type="text" id="editarQuantidade" name="quantidade" class="form-control">
+                    <label>Quantidade</label>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class='btn btn-secondary' onclick='fecharModalVenda()'>Fechar</button>
@@ -236,6 +250,7 @@ if ($result) {
 
     function abrirModalVenda(id) {
         $("#modalVenda").modal("show");
+        limparCamposVendas();
 
         produto = document.getElementById("produto" + id);
         quantidade = document.getElementById("quantidade" + id)
