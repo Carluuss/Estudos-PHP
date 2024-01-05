@@ -1,3 +1,16 @@
+<div class="row mb-5 text-center d-nome d-lg-block">
+    <div class="col-lg-12 col-sm-12">
+        <div class="m-2">
+            <button class="btn btn-warning" onclick="abrirModalFiltros()">Filtrar Produtos
+            </button>
+        </div>
+        <button class="btn btn-warning d-none" id="btnRemoverFiltros" onclick='removerFiltros(this)'>Remover
+            Filtros</button>
+    </div>
+</div>
+
+
+
 <?php
 
 
@@ -26,7 +39,7 @@ if (isset($_SESSION['atualizar'])) { //existe uma sessão
         unset($_SESSION['cadastrar']); //excluir sessão
         echo "<script>alert('Erro ao cadastrar produto')</script>";
     }
-}else if (isset($_SESSION['vender'])) { //existe uma sessão
+} else if (isset($_SESSION['vender'])) { //existe uma sessão
     if ($_SESSION['vender'] == "1") { //verifica se sessão é igual a 1
         unset($_SESSION['vender']); //excluir sessão
         echo "<script>alert('Venda efetuada')</script>";
@@ -46,7 +59,9 @@ $sql = "SELECT * FROM produtos ORDER BY produto";
 
 $result = mysqli_query($conn, $sql);
 
+
 if ($result) {
+
     echo "
     <body>
     <div class='container mt-2 d-flex justify-content-center'>
@@ -161,30 +176,30 @@ if ($result) {
                     <h5 class="modal-title" id="exampleModalLongTitle">Vender Produtos</h5>
                 </div>
                 <div class="modal-body">
-                <?php
+                    <?php
 
-                $sql = "SELECT * FROM produtos WHERE 1";
-                $result = mysqli_query($conn, $sql);
-                $linha = mysqli_fetch_array($result);
-                
-                echo("
+                    $sql = "SELECT * FROM produtos WHERE 1";
+                    $result = mysqli_query($conn, $sql);
+                    $linha = mysqli_fetch_array($result);
+
+                    echo ("
                     <div class='form-floating mb-3'>
                         <select class='form-select' name='produto' aria-label='Default select example'>
                             <option selected>Selecione o produto</option>
                 ");
-                        while($linha = mysqli_fetch_array($result)) {
-                            echo("<option value= ". $linha['id']. "> ".$linha["produto"]."</option>");
-                        }
-                echo("</select>
+                    while ($linha = mysqli_fetch_array($result)) {
+                        echo ("<option value= " . $linha['id'] . "> " . $linha["produto"] . "</option>");
+                    }
+                    echo ("</select>
                 <label>Produto</label>
                 </select>
             </div>");
-                
-                
-                ?>
-                <div class="form-floating mb-3">
-                    <input type="text" id="editarQuantidade" name="quantidade" class="form-control">
-                    <label>Quantidade</label>
+
+
+                    ?>
+                    <div class="form-floating mb-3">
+                        <input type="text" id="editarQuantidade" name="quantidade" class="form-control">
+                        <label>Quantidade</label>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class='btn btn-secondary' onclick='fecharModalVenda()'>Fechar</button>
@@ -196,6 +211,31 @@ if ($result) {
 
     </div>
 
+</div>
+
+<div class="modal fade" id='modalFiltro'>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class='modal-title' id='exampleModalLongTitle'>Filtrar Produtos</h5>
+            </div>
+            <div class="modal-body">
+                <h5>Filtrar por...</h5>
+                <div class="form-floating mb-3">
+                    <input type="text" id='filtroId' class='form-control'>
+                    <label for="filtrarId">Id</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" id="filtroProduto" class="form-control">
+                    <label for="filtrarProduto">Produto</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick='fecharModalFitlros()'>Fechar</button>
+                <button type="button" class="btn btn-primary" onclick='aplicarFiltros()'>Aplicar Filtros</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -247,7 +287,6 @@ if ($result) {
     function fecharModalEditar() {
         $("#modalEditar").modal("hide");
     }
-
     function abrirModalVenda(id) {
         $("#modalVenda").modal("show");
         limparCamposVendas();
@@ -259,6 +298,62 @@ if ($result) {
 
     function fecharModalVenda() {
         $("#modalVenda").modal("hide");
+    }
+
+    function limparCamposVendas() {
+        document.getElementById('editarQuantidade').value = '';
+    }
+
+</script>
+
+<script>
+    //abre o modal filtros
+    function abrirModalFiltros() {
+        $("#modalFiltro").modal("show");
+    }
+    //fecha o modal filtros
+    function fecharModalFitlros() {
+        $("#modalFiltro").modal("hide");
+    }
+
+    function limparCampos() {
+        document.getElementById("filtroId").value = '';
+        document.getElementById("filtroProduto").value = '';
+    }
+
+    const btnRemoverFiltros = document.querySelectorAll("#btnRemoverFiltros");
+    function aplicarFiltros() {
+        //armazena os valores a serem procurados
+        let idProduto = document.getElementById("filtroId").value;
+
+        let produto = document.getElementById("filtroProduto").value;
+        //tabela gerada pelo PHP
+        let tabela = document.getElementById("tabelaPrincipal").value;
+
+        let json = {};
+
+        if (idProduto != "") { json.idProduto = idProduto; }
+        if (produto != "") { json.produto = produto; }
+        alert(json.idProduto);
+        alert(json.produto);
+        
+
+
+        if (idProduto != "" || produto != "") {
+        $.ajax({
+            url: "./querys.php",
+                method: "POST",
+                    data: { filtroTabela: "sim", tabela : "produtos", filtroData : JSON.stringify(json) },
+            success: (data) => {
+                tabela.innerHTML = data;
+
+                btnRemoverFiltros[0].classList.remove("d-none");
+
+                $("#modalFiltro").modal("hide");
+            }
+
+        })
+        }
     }
 
 </script>
