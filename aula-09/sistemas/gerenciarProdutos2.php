@@ -229,6 +229,14 @@ if ($result) {
                     <input type="text" id="filtroProduto" class="form-control">
                     <label for="filtrarProduto">Produto</label>
                 </div>
+                <div class="form-floating mb-3">
+                    <input type="text" id="filtroValor" class="form-control">
+                    <label for="filtrarValor">Valor</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" id="filtroQuantidade" class="form-control">
+                    <label for="filtrarQuantidade">Quantidade</label>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" onclick='fecharModalFitlros()'>Fechar</button>
@@ -300,6 +308,7 @@ if ($result) {
     }
 
     function fecharModalVenda() {
+        limparCamposVendas();
         $("#modalVenda").modal("hide");
     }
 
@@ -312,17 +321,20 @@ if ($result) {
 <script>
     //abre o modal filtros
     function abrirModalFiltros() {
-    
+        limparCamposFiltro();
         $("#modalFiltro").modal("show");
     }
     //fecha o modal filtros
     function fecharModalFitlros() {
+        limparCamposFiltro();
         $("#modalFiltro").modal("hide");
     }
 
-    function limparCampos() {
+    function limparCamposFiltro() {
         document.getElementById("filtroId").value = '';
         document.getElementById("filtroProduto").value = '';
+        document.getElementById("filtroValor").value = '';
+        document.getElementById("filtroQuantidade").value = '';
     }
 
     const btnRemoverFiltros = document.querySelectorAll("#btnRemoverFiltros");
@@ -330,7 +342,11 @@ if ($result) {
         //armazena os valores a serem procurados
         let idProduto = document.getElementById("filtroId").value;
 
+        let valor = document.getElementById("filtroValor").value;
+
         let produto = document.getElementById("filtroProduto").value;
+
+        let quantidade = document.getElementById("filtroQuantidade").value;
         //tabela gerada pelo PHP
         let tabela = document.getElementById("tabelaPrincipal");
 
@@ -338,24 +354,42 @@ if ($result) {
 
         if (idProduto != "") { json.idProduto = idProduto; }
         if (produto != "") { json.produto = produto; }
-        
+        if (valor != "") { json.valor = valor; }
+        if (quantidade != "") { json.quantidade = quantidade; }
 
 
-        if (idProduto != "" || produto != "") {
+
+        if (idProduto != "" || produto != "" || valor != "" || quantidade != "") {
+            $.ajax({
+                url: "./querys.php",
+                method: "POST",
+                data: { filtroTabela: "sim", tabela: "produtos", filtroData: JSON.stringify(json) },
+                success: (data) => {
+                    tabela.innerHTML = data;
+
+                    btnRemoverFiltros[0].classList.remove("d-none");
+
+                    $("#modalFiltro").modal("hide");
+                }
+
+            })
+        }
+    }
+
+    function removerFiltros() {
+        let tabela = document.getElementById("tabelaPrincipal");
         $.ajax({
             url: "./querys.php",
-                method: "POST",
-                    data: { filtroTabela: "sim", tabela : "produtos", filtroData : JSON.stringify(json) },
+            method: "POST",
+            data: {
+                tabelaNormal: "sim", tabela: "produtos",
+                removerFiltro: "sim"
+            },
             success: (data) => {
                 tabela.innerHTML = data;
-
-                btnRemoverFiltros[0].classList.remove("d-none");
-
-                $("#modalFiltro").modal("hide");
+                btnRemoverFiltros[0].classList.add("d-none");
             }
-
         })
-        }
     }
 
 </script>

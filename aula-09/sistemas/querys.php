@@ -3,9 +3,10 @@ session_start();
 
 include_once("conexao.php");
 
-function gerarTabelaHTML($mysqli_query){
+function gerarTabelaHTML($mysqli_query)
+{
 
-    echo"<tr class='table-light' class='table-sm'>
+    echo "<tr class='table-light' class='table-sm'>
     <th>ID</th>
     <th>Produto</th>
     <th>Valor</th>
@@ -45,7 +46,8 @@ function gerarTabelaHTML($mysqli_query){
         
         
         ";
-    };
+    }
+    ;
 }
 
 
@@ -66,16 +68,38 @@ function retornarTabelaComFiltros($conexao, $tabela, $filtros)
         $prod = $filtros["produto"];
         $sql .= " produto LIKE '%$prod%' AND";
     }
+    if (isset($filtros["valor"])) {
+        $valor = $filtros["valor"];
+        $sql .= " valor LIKE '%$valor%' AND";
+    }
+    if (isset($filtros["quantidade"])) {
+        $quantidade = $filtros["quantidade"];
+        $sql .= " quantidade = $quantidade AND";
+    }
 
     $final = trim(substr($sql, strlen($sql) - 3, strlen($sql)));
-    if ($final == "AND") {$sql = trim(substr($sql, 0, strlen($sql) - 3));}
+    if ($final == "AND") {
+        $sql = trim(substr($sql, 0, strlen($sql) - 3));
+    }
     $sql .= " LIMIT 0, 10";
 
     gerarTabelaHTML(mysqli_query($conexao, $sql));
 
     $_SESSION["filtro"] = $sql;
+
+
 }
 
+if (isset($_POST["tabelaNormal"]) && isset($_POST["tabela"])) {
+    $tabela = $_POST["tabela"];
+    $sql = "SELECT * FROM produtos LIMIT 0, 10";
+    $result = mysqli_query($conn, $sql);
+    gerarTabelaHTML($result);
+}
+
+if (isset($_POST["removerFiltro"])) {
+    unset($_SESSION["filtro"]);
+}
 
 
 ?>
