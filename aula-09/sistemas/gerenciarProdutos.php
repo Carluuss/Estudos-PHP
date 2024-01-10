@@ -64,7 +64,7 @@ if ($result) {
         
         
         <tr id='trCadastro' >
-        <form action='pesquisa.php' method='post'>
+        <form action='gerenciarProdutos2.php' method='post'>
         <td data-label='ID'> $linha[id]</td>
         <td data-label='Produto'> $linha[produto]</td>
         <td data-label='Valor'>R$ $linha[valor]</td>
