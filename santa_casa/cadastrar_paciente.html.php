@@ -13,11 +13,11 @@ include_once("bootstrap.php");
 
 echo"<body>
 
-<div class='card container mt-3 mb-3>
+<div class='card container mt-3 mb-3'>
     <div class='mt-2'>
     <h2 style= 'text-align: center;'
     class='mt-1'>CADASTRO DE PACIENTE</h2>
-
+</div>
 
 <form action='cadastrar_paciente.php' method='POST'>
 <div class='mb-3'>
