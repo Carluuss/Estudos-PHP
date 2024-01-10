@@ -1,16 +1,3 @@
-<div class="row mb-5 text-center d-nome d-lg-block">
-    <div class="col-lg-12 col-sm-12">
-        <div class="m-2">
-            <button class="btn btn-warning" onclick="abrirModalFiltros()">Filtrar Produtos
-            </button>
-        </div>
-        <button class="btn btn-warning d-none" id="btnRemoverFiltros" onclick='removerFiltros(this)'>Remover
-            Filtros</button>
-    </div>
-</div>
-
-
-
 <?php
 
 
@@ -66,8 +53,21 @@ if ($result) {
     <body>
     <div class='container mt-2 d-flex justify-content-center'>
     
-    <button class='btn btn-danger text-center'  onclick='abrirModalVenda()'>Venda</button>
+    <div class='row mb-5 text-center d-nome d-lg-block'>
+    <div class='col-lg-12 col-sm-12'>
+        <div class='m-2'>
+            <button class='btn btn-warning' onclick='abrirModalFiltros()'>Filtrar Produtos
+            </button>
+        </div>
+        <button class='btn btn-warning d-none' id='btnRemoverFiltros' onclick='removerFiltros(this)'>Remover
+            Filtros</button>
+            <button class='btn btn-danger text-center'  onclick='abrirModalVenda()'>Venda</button>
     </div>
+    </div>
+    
+</div>
+
+    
     <div class='container card mt-2'>
     <h2>Lista de produtos</h2>
     <a href ='formulario.html'class = 'btn btn-primary'>Cadastrar</a>
@@ -238,6 +238,9 @@ if ($result) {
     </div>
 </div>
 
+
+
+
 <script>
     function abrirModalEditar(id) {
         $("#modalEditar").modal("show");
@@ -309,6 +312,7 @@ if ($result) {
 <script>
     //abre o modal filtros
     function abrirModalFiltros() {
+    
         $("#modalFiltro").modal("show");
     }
     //fecha o modal filtros
@@ -328,14 +332,12 @@ if ($result) {
 
         let produto = document.getElementById("filtroProduto").value;
         //tabela gerada pelo PHP
-        let tabela = document.getElementById("tabelaPrincipal").value;
+        let tabela = document.getElementById("tabelaPrincipal");
 
         let json = {};
 
         if (idProduto != "") { json.idProduto = idProduto; }
         if (produto != "") { json.produto = produto; }
-        alert(json.idProduto);
-        alert(json.produto);
         
 
 
