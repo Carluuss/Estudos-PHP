@@ -11,14 +11,14 @@ mysqli_query($conn, $sql);
 session_start();
 if(mysqli_affected_rows($conn)){//iniciar sessão
     $_SESSION['excluir'] = "1";//atribui um valor a sessão
-    header('Location:./gerenciarProdutos.php');
+    header('Location:./gerenciarProdutos2.php');
 }else{
     $_SESSION['excluir'] = "2";//atribui um valor a sessão
-    header('Location:./gerenciarProdutos.php');
+    header('Location:./gerenciarProdutos2.php');
 }
 
 
 
-header("location: gerenciarProdutos.php");
+header("location: gerenciarProdutos2.php");
 
 ?>
