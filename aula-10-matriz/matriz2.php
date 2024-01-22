@@ -20,13 +20,13 @@ $medias = array(
     array("nota1" => 9, "nota2" => 9, "nota3" => 10),
     array("nota1" => 8, "nota2" => 10, "nota3" => 10),
 );
-    foreach($medias as $index => $notas){
-        $media = 0;
-        foreach($notas as $key => $value){
-            $media += $value;
-        }
-        $media = round($media/3, 2);
-        echo "Media do aluno ". ($index + 1). " = $media<br>";
+foreach ($medias as $index => $notas) {
+    $media = 0;
+    foreach ($notas as $key => $value) {
+        $media += $value;
     }
+    $media = round($media / 3, 2);
+    echo "Media do aluno " . ($index + 1) . " = $media<br>";
+}
 
 ?>
