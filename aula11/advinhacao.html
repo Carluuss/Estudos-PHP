@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advinhacao</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="card container mt-2" id="cardInicio">
+        <h1>Jogo da Forca </h1>
+        <input type="text" class="form-control m-2" id="chave" placeholder="Digite uma palavra">
+        <button class="btn btn-primary m-2" onclick="iniciar()">Iniciar</button>
+    </div>
+
+    <div class="card container mt-2 d-none" id="cardJogo">
+        <div class="m-2">
+            <h1 id="palavra"></h1>
+        </div>
+        <input type="text" class="form-control m-2" id="letra" maxlength="1">
+        <button class="btn btn-primary m-2" onclick="verificar()">Verificar</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
