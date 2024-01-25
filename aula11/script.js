@@ -20,7 +20,7 @@ function limparCampos() {
   letra = document.getElementById("letra").value = "";
 }
 
-let tentativas = 5;
+let tentativas = 6;
 function verificar() {
   let chave = document.getElementById("chave").value;
   let letra = document.getElementById("letra").value;
@@ -28,15 +28,23 @@ function verificar() {
   let lista = document.getElementById("listaLetras");
   let itens = document.createElement("li");
 
+  encontrou = false;
   for (let i = 0; i < chave.length; i++) {
     if (letra == chave[i]) {
+      encontrou = true;
       chaveApoio =
       chaveApoio.substring(0, i) + letra + chaveApoio.substring(i + 1);
     }
   }
   
-  !chave.includes(letra) ? tentativas-- : "";
   
+  // !chave.includes(letra) ? tentativas-- : "";
+  
+  if(!encontrou){
+    tentativas--;
+    mudarImagem();
+  }
+
   if (chaveApoio == chave) {
     alert("PARABÉNS!!");
     location.reload();
@@ -51,6 +59,23 @@ function verificar() {
   itens.textContent = letra;
   lista.appendChild(itens);
   limparCampos();
+
+  
+}
+
+let img = document.getElementById("imagem");
+
+function mudarImagem(){
+  switch(tentativas){
+    case 6: img.src = "./image/jogo-da-forca6.png"; break;
+    case 5: img.src = "./image/jogo-da-forca5.png"; break;
+    case 4: img.src = "./image/jogo-da-forca4.png"; break;
+    case 3: img.src = "./image/jogo-da-forca3.png"; break;
+    case 2: img.src = "./image/jogo-da-forca2.png"; break;
+    case 1: img.src = "./image/jogo-da-forca1.png"; break;
+    case 0: img.src = "./image/jogo-da-forca.png"; break;
+  }
+  
 }
 
 function reiniciar(){
