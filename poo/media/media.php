@@ -1,26 +1,17 @@
 <?php
 include("aluno.php");
-$aluno1 = new Aluno();
-$aluno1->nota1 = 7;
-$aluno1->nota2 = 8;
-$aluno1->nota3 = 9;
-$media1 = ($aluno1->nota1 + $aluno1->nota2 + $aluno1->nota3) / 3;
+$aluno1 = new Aluno(7, 8, 9);
+$media1 = $aluno1->media();
 echo ("<br> As notas deste aluno foram: $aluno1->nota1, $aluno1->nota2, $aluno1->nota3 <br> Média das notas: " . round($media1, 2));
 echo $media1 >= 7 ?" (Aprovado)": " (Reprovado)";
 
-$aluno2 = new Aluno();
-$aluno2->nota1 = 3;
-$aluno2->nota2 = 6;
-$aluno2->nota3 = 4;
-$media2 = ($aluno2->nota1 + $aluno2->nota2 + $aluno2->nota3) / 3;
+$aluno2 = new Aluno(3, 6, 4);
+$media2 = $aluno2->media();
 echo ("<br> As notas deste aluno foram: $aluno2->nota1, $aluno2->nota2, $aluno2->nota3 <br> Média das notas: " . round($media2, 2));
 echo $media2 >= 7 ?" (Aprovado)": " (Reprovado)";
 
-$aluno3 = new Aluno();
-$aluno3->nota1 = 7;
-$aluno3->nota2 = 6;
-$aluno3->nota3 = 8;
-$media3 = ($aluno3->nota1 + $aluno3->nota2 + $aluno3->nota3) / 3;
+$aluno3 = new Aluno(7, 6, 8);
+$media3 = $aluno3->media();
 echo ("<br> As notas deste aluno foram: $aluno3->nota1, $aluno3->nota2, $aluno3->nota3 <br> Média das notas: " . round($media3, 2));
 echo $media3 >= 7 ?" (Aprovado)": " (Reprovado)";
 
