@@ -4,12 +4,20 @@
         private $conta = "";
         private $saldo = 0;
         private $senha = "";
-        public function __construct($a, $c, $sa, $se){
-            $this->agencia = $a;
-            $this->conta = $c;
-            $this->saldo = $sa;
-            $this->senha = $se;
+
+        
+        public function selecionarConta($conta, $conn){
+            try{
+                $sql = "SELECT * FROM contas WHERE conta = $conta";
+                $linha = $conn->selecionar($sql);
+                return $linha;
+            }catch(Exception $e){
+                die("Connection failed: " . $e->getMessage());
+            }
         }
+
+    
+
         function setAgencia($a){
             $this->agencia = $a;
         }
@@ -30,8 +38,10 @@
             $this->saldo = $sa;
         }
     
-        function getSaldo(){
-            return $this->saldo;
+        function getSaldo($conta, $conn){
+            $sql = "SELECT saldo FROM contas WHERE conta = $conta";
+            $linha = $conn->selecionar($sql);
+            return $linha['saldo'];
         }
     
         function setSenha($se){

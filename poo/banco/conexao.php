@@ -12,22 +12,34 @@ class Conexao
         }
 
     }
-
     public function inserir($c)
     {
-        try{
+        try {
             $conexao = $this->criarConexao();
             $sql = "INSERT INTO contas (agencia, conta, saldo, senha) VALUES ('" . $c->getAgencia() . "', '" . $c->getConta() . "', '" . $c->getSaldo() . "', '" . $c->getSenha() . "')";
             mysqli_query($conexao, $sql);
-        }catch(Exception $e){
+        } catch (Exception $e) {
 
             die("Connection failed: " . $e->getMessage());
 
-        }finally{
+        } finally {
             mysqli_close($conexao);
         }
     }
 
+    public function selecionar($sql)
+    {
+        try {
+            $conexao = $this->criarConexao();
+            $result = mysqli_query($conexao, $sql);
+            $linha = mysqli_fetch_array($result);
+            return $linha;
+        } catch (Exception $e) {
+            die("Connection failed: " . $e->getMessage());
+        } finally {
+            mysqli_close($conexao);
+        }
+    }
 }
 
 ?>
