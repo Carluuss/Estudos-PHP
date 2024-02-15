@@ -40,6 +40,22 @@ class Conexao
             mysqli_close($conexao);
         }
     }
+
+    public function dml($sql){
+        try{
+            $conexao = $this->criarConexao();
+            mysqli_query($conexao, $sql);
+            if(mysqli_affected_rows($conexao))
+            return true;
+        else
+        return false;
+        }catch(Exception $e){
+            die("Connection falied: ". $e->getMessage());
+            return false;
+        }finally{
+            mysqli_close($conexao); //fechar a conexão
+        }
+    }
 }
 
 ?>
