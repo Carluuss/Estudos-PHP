@@ -1,8 +1,10 @@
 <?php
 include("conta.php");
 include("conexao.php");
-$c = new Conta($_POST["agencia"], $_POST["conta"], 0, $_POST["senha"]);
+$c = new Conta();
 //conexão
 $conn = new Conexao();//criar objeto da classe conexao
-$conn->inserir($c);
+$result = $c->criarConta($_POST["agencia"], $_POST["conta"], 0, $_POST["senha"], $conn);
+// $conn->inserir($c);
+echo $result;
 ?>

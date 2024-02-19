@@ -5,7 +5,17 @@
         private $saldo = 0;
         private $senha = "";
 
-        
+        function criarConta($a, $c, $sa, $se, $conn){
+            try{
+                $sql = "INSERT INTO contas (agencia, conta, saldo, senha) VALUES ('".$a."','".$c."','".$sa."','".$se."')";
+                $result = $conn->dml($sql);
+                return $result ? "Conta criada com sucesso" : "Erro ao criar conta";
+            }catch(Exception $e){
+                die("Connection failed: " . $e->getMessage());
+                return "Erro ao criar conta";
+            }
+        }
+
         public function selecionarConta($conta, $conn){
             try{
                 $sql = "SELECT * FROM contas WHERE conta = $conta";
