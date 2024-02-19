@@ -69,6 +69,27 @@
             }
         }
     
+
+        function sacar($conta, $conn, $valor){
+            try{
+                //saber o saldo
+                $saldo = $this->getSaldo($conta, $conn);
+                //verificar se há saldo suficiente
+                if($saldo >= $valor){
+                    //caso sim subtrair
+                    $saldo -= $valor;
+                    //e atualizar o saldo
+                    $result = $this->setSaldo($conta, $conn, $saldo);
+                    return $result ? "Saque realizado com sucesso" : "Saque não realizado";
+                }else{//caso não saldo insuficiente
+                    return "Saldo insuficiente";
+                }
+            }catch(Exception $e){
+                die("Connection failed: " . $e->getMessage());
+                return "Saque não realizado";
+            }
+        }
+
         
     }
     
