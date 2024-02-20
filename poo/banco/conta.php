@@ -55,8 +55,10 @@
             $this->senha = $se;
         }
         
-        function getSenha(){
-            return $this->senha;
+        function getSenha($conta, $conn){
+            $sql = "SELECT senha FROM contas WHERE conta = $conta";
+            $linha = $conn->selecionar($sql);
+            return $linha['senha'];
         }
         
         function depositar($conta, $conn, $valor){
@@ -96,10 +98,10 @@
         }
         function login($agencia, $conta, $senha, $conn){
             try{
-                $sql = "SELECT agencia, conta, senha FROM contas WHERE conta = '$conta'";
-                $linha = $conn->selecionar($sql);
+               $a = $this->getAgencia($conta, $conn);
+               $s = $this->getSenha($conta, $conn);
                 //comparar
-                if($linha["agencia"] == $agencia && $linha["conta"] == $conta && $linha["senha"] == md5($senha)){
+                if($a == $agencia && $s == md5($senha)){
                     return "acesso permitido";
                 }else{
                     return "acesso negado";
