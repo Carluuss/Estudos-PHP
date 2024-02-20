@@ -1,13 +1,8 @@
 <?php
     class Conta{
-        private $agencia = "";
-        private $conta = "";
-        private $saldo = 0;
-        private $senha = "";
-
         function criarConta($a, $c, $sa, $se, $conn){
             try{
-                $sql = "INSERT INTO contas (agencia, conta, saldo, senha) VALUES ('".$a."','".$c."','".$sa."','".$se."')";
+                $sql = "INSERT INTO contas (agencia, conta, saldo, senha) VALUES ('".$a."','".$c."','".$sa."','".md5($se)."')";
                 $result = $conn->dml($sql);
                 return $result ? "Conta criada com sucesso" : "Erro ao criar conta";
             }catch(Exception $e){
@@ -27,14 +22,14 @@
         }
 
     
-
-       
         function setAgencia($a){
-            $this->agencia = $a;
+            // $this->agencia = $a;
         }
     
-        function getAgencia(){
-            return $this->agencia;
+        function getAgencia($conta, $conn){
+            $sql = "SELECT agencia FROM contas WHERE conta = $conta";
+            $linha = $conn->selecionar($sql);
+            return $linha['agencia'];
         }
     
         function setConta($c){
@@ -97,6 +92,21 @@
             }catch(Exception $e){
                 die("Connection failed: " . $e->getMessage());
                 return "Saque não realizado";
+            }
+        }
+        function login($agencia, $conta, $senha, $conn){
+            try{
+                $sql = "SELECT agencia, conta, senha FROM contas WHERE conta = '$conta'";
+                $linha = $conn->selecionar($sql);
+                //comparar
+                if($linha["agencia"] == $agencia && $linha["conta"] == $conta && $linha["senha"] == md5($senha)){
+                    return "acesso permitido";
+                }else{
+                    return "acesso negado";
+                }
+            }catch(Exception $e){
+                die("Connection failed: " . $e->getMessage());
+                return "acesso negado";
             }
         }
 
